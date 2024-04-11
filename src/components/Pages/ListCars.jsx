@@ -7,6 +7,7 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons/faTrash'
 function ListCars() {
 
   const [list, setList] = useState([])
+  const [refresh, setRefresh] = useState(false)
 
   let token = localStorage.getItem('token')
 
@@ -20,7 +21,7 @@ function ListCars() {
       setList(rs.data.get)
     }
     getList();
-  }, [])
+  }, [refresh])
 
   const hdlDelete = async (e, id) => {
     e.preventDefault();

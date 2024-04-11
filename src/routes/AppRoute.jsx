@@ -38,7 +38,7 @@ const userRouter = createBrowserRouter([
             <Footer />
         </>,
         children: [
-            { index: true, element: <p>Test User</p> },
+            { index: true, element: <Body />},
         ]
     },
     {

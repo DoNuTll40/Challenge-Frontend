@@ -20,9 +20,9 @@ function Footer() {
         <div className="w-1/2">
           <p className="text-md font-bold">ติดต่อฉัน</p>
           <div className="text-sm font-bold pl-2">
-            <div className="flex gap-2 items-center my-1 hover:cursor-pointer w-fit" onClick={ () => window.location = 'mailto:nuttawoot.ch64@snru.ac.th'}>
+            <div className="flex gap-2 items-center my-1 hover:cursor-pointer w-fit text-ellipsis" onClick={ () => window.location = 'mailto:nuttawoot.ch64@snru.ac.th'}>
               <FontAwesomeIcon icon={faEnvelope} className="bg-white p-1.5 rounded-full"/>
-              <p>nuttawoot.ch64@snru.ac.th</p>
+              <p className="w-fit text-ellipsis break-normal">nuttawoot.ch64@snru.ac.th</p>
             </div>
             <div className="flex gap-2 items-center my-1 hover:cursor-pointer w-fit" onClick={ () => window.location = 'mailto:iinter731@gmail.com'}>
               <FontAwesomeIcon icon={faEnvelope} className="bg-white p-1.5 rounded-full"/>

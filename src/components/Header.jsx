@@ -25,12 +25,14 @@ function Header() {
       <div className="bg-slate-500 select-none">
         <div className="max-w-[80rem] h-14 px-2 mx-auto flex items-center justify-between">
           <div className="w-fit text-lg flex gap-8">
-            <h1 className={`font-bold mb-1 hover:cursor-pointer transition ease-in-out hover:text-white ${pathname === '/' ? "text-white" : ""}`} onClick={ () => navigate('/')}>ระบบบันทึก</h1>
-            <div className="flex gap-5 text-[16px] font-semibold ">
-              {adminNav.map((el, index) => (
-                <Link key={index + 1} className={`transition ease-in-out hover:text-white hover:underline hover:underline-offset-[1.4rem] ${pathname === el.to ? "underline underline-offset-[1.4rem] text-white" : ""}`} to={el.to}>{el.title}</Link>
-              ))}
-            </div>
+            <h1 className={`font-bold mb-1 hover:cursor-pointer transition ease-in-out hover:text-white ${pathname === '/' ? "text-white" : ""}`} onClick={() => navigate('/')}>ระบบบันทึก</h1>
+            {user.user_role === "admin" ? (
+              <div className="flex gap-5 text-[16px] font-semibold ">
+                {adminNav.map((el, index) => (
+                  <Link key={index + 1} className={`transition ease-in-out hover:text-white hover:underline hover:underline-offset-[1.4rem] ${pathname === el.to ? "underline underline-offset-[1.4rem] text-white" : ""}`} to={el.to}>{el.title}</Link>
+                ))}
+              </div>
+            ) : null}
           </div>
           <div className="w-fit flex gap-2 items-center">
             <p className="font-bold mb-1">{user.user_firstname.toUpperCase()}</p>
