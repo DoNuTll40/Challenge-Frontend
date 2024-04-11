@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import useAuth from '../../hooks/UserAuth'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons/faTrash';
+import { faEdit } from '@fortawesome/free-solid-svg-icons';
 
 
 function ListUsers() {
@@ -10,6 +11,7 @@ function ListUsers() {
     const { user } = useAuth();
     const [users, setUsers] = useState([])
     const [filter, setFilter] = useState(null);
+    const [refresh, setRefresh] = useState(false);
 
     let token = localStorage.getItem('token')
 
@@ -23,7 +25,29 @@ function ListUsers() {
             setUsers(rs.data.fullUser)
         }
         getUser()
-    }, [])
+    }, [refresh])
+
+    const hdlDelete = async (e, id) => {
+        e.preventDefault()
+        if(confirm('คุณต้องการลบข้อมูลหรือไม่')){
+            try {
+                const rs = await axios.delete(`/admin/users/${id}`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                })
+                if(rs.status === 200){
+                    alert("ลบข้อมูลเรียบร้อยแล้ว")
+                    setRefresh(prv => !prv)
+                }
+            }catch(err){
+                console.log(err);
+                alert(err.response.data.message);
+            }
+        }else{
+            alert('ยกเลิกเรียบร้อยแล้ว')
+        }
+    }
 
     return (
         <div>
@@ -54,7 +78,7 @@ function ListUsers() {
                                         <th>นามสกุล</th>
                                         <th>อีเมล</th>
                                         <th>เบอร์โทร</th>
-                                        <th className='text-center'>คำสั่ง</th>
+                                        <th className='text-center' colSpan={2}>คำสั่ง</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -65,7 +89,8 @@ function ListUsers() {
                                             <td>{el.user_lastname}</td>
                                             <td>{el.user_email}</td>
                                             <td>{el.user_phone}</td>
-                                            <td className='text-center'><button><FontAwesomeIcon icon={faTrash} /></button></td>
+                                            <td className='text-center'><button><FontAwesomeIcon icon={faEdit} /></button></td>
+                                            <td className='text-center'><button onClick={ (e) => hdlDelete(e, el.user_id)}><FontAwesomeIcon icon={faTrash} /></button></td>
                                         </tr>
                                     ))}
                                 </tbody>

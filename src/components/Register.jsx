@@ -24,13 +24,16 @@ function Register() {
 
     const hdlSubmit = async e => {
         e.preventDefault();
+        if (!input.user_firstname || !input.user_lastname || !input.user_email || !input.user_phone || !input.user_password || !input.confirmPassword) {
+            return alert("โปรดกรอกข้อมูลให้ครบ")
+        }
         try {
             const rs = await axios.post('/auth/register', input);
-            if(rs.status === 200){
+            if (rs.status === 200) {
                 alert("กรุณา login เพื่อเข้าสู่ระบบ")
                 navigate('/')
             }
-        } catch(err) {
+        } catch (err) {
             console.log(err)
             alert(err.response.data.message)
         }

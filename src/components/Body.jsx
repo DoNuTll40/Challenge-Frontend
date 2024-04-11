@@ -3,7 +3,7 @@ import axiosApi from "axios"
 import axios from "../configs/axios-path"
 import { useEffect, useState } from "react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faRightToBracket, faSave } from "@fortawesome/free-solid-svg-icons"
+import { faEdit, faRightToBracket, faSave } from "@fortawesome/free-solid-svg-icons"
 import { faTrash } from "@fortawesome/free-solid-svg-icons/faTrash"
 
 function Body() {
@@ -44,7 +44,7 @@ function Body() {
   const hdlSubmit = async (e) => {
     e.preventDefault();
 
-    if (!input.rec_brand && !input.rec_color && !input.rec_detail && !input.rec_model && !input.rec_regiscar) {
+    if (!input.rec_brand || !input.rec_color || !input.rec_detail || !input.rec_model || !input.rec_regiscar) {
       return alert("โปรดกรอกข้อมูลให้ครบ")
     }
 
@@ -70,7 +70,7 @@ function Body() {
 
   const hdlDelete = async (e, id) => {
     e.preventDefault()
-    if(confirm("คุณต้องการลบข้อมูลที่บันทึกหรือไม่")){
+    if (confirm("คุณต้องการลบข้อมูลที่บันทึกหรือไม่")) {
       try {
         const rs = await axios.delete(`/car/delete/${id}`, {
           headers: {
@@ -85,7 +85,7 @@ function Body() {
         console.log(err)
         alert(err.response.data.message)
       }
-    }else{
+    } else {
       alert("ยกเลิกการลบเสร็จสิ้น")
     }
   }
@@ -136,9 +136,12 @@ function Body() {
                   <p className="truncate text-ellipsis overflow-hidden w-[200px]" title={el.rec_brand}>ชื่อแบรนด์รถ {el.rec_brand}</p>
                   <p>หมายเลขรุ่นรถ {el.rec_model}</p>
                   <p>สีของรถ {el.rec_color}</p>
-                  <p>หมายเหตุ {el.rec_detail}</p>
+                  <p className="truncate text-ellipsis overflow-hidden w-[200px]" title={el.rec_detail}>หมายเหตุ {el.rec_detail}</p>
                 </div>
-                <div className="h-full border-2 border-red-600 text-red-600 hover:cursor-pointer rounded-md flex items-center justify-center w-14" onClick={(e) => hdlDelete(e, el.rec_id)}><FontAwesomeIcon icon={faTrash} /></div>
+                <div className="flex flex-col gap-3 h-full">
+                  <div className="h-1/2 border-2 border-yellow-400 text-yellow-400 hover:cursor-pointer rounded-md flex items-center justify-center w-14"><FontAwesomeIcon icon={faEdit} /></div>
+                  <div className="h-1/2 border-2 border-red-600 text-red-600 hover:cursor-pointer rounded-md flex items-center justify-center w-14" onClick={(e) => hdlDelete(e, el.rec_id)}><FontAwesomeIcon icon={faTrash} /></div>
+                </div>
               </div>
             ))}
           </div>
