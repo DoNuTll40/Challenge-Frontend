@@ -254,16 +254,16 @@ function Body() {
             {list.map((el, index) => (
               <div key={index + 1} className="bg-white rounded-md p-2 shadow-md border-2 w-[302px] flex justify-between items-center">
                 <div>
-                  <p>หมายเลขทะเบียบ {el.rec_regiscar}</p>
-                  <p className="truncate text-ellipsis overflow-hidden w-[200px]" title={el.rec_brand}>ชื่อแบรนด์รถ {el.rec_brand}</p>
-                  <p>หมายเลขรุ่นรถ {el.rec_model}</p>
+                  <p>เลขทะเบียบ {el.rec_regiscar}</p>
+                  <p className={`truncate text-ellipsis overflow-hidden ${el.users.user_id === user.user_id ? "w-[200px]": "w-[270px]"}`} title={el.rec_brand}>ชื่อแบรนด์รถ {el.rec_brand}</p>
+                  <p>รุ่นของรถ {el.rec_model}</p>
                   <p>สีของรถ {el.rec_color}</p>
-                  <p className="truncate text-ellipsis overflow-hidden w-[200px]" title={el.rec_detail}>หมายเหตุ {el.rec_detail}</p>
+                  <p className={`truncate text-ellipsis overflow-hidden ${el.users.user_id === user.user_id ? "w-[200px]": "w-[270px]"}`} title={el.rec_detail}>หมายเหตุ {el.rec_detail}</p>
                 </div>
                 <div className="flex flex-col gap-3 h-full">
                   {el.users.user_id === user.user_id ? (
                     <>
-                      <button className="h-1/2 border-2 border-yellow-400 text-yellow-400 hover:cursor-pointer rounded-md flex items-center justify-center w-14 disabled:opacity-50 disabled:cursor-not-allowed" disabled={edit} onClick={(e) => { setEdit(!edit); hdlEdit(e, el.rec_id); }}><FontAwesomeIcon icon={faEdit} /></button>
+                      <button className="h-1/2 border-2 border-yellow-400 text-yellow-400 hover:cursor-pointer rounded-md flex items-center justify-center w-14 disabled:opacity-50 disabled:cursor-not-allowed" disabled={edit} onClick={(e) => { setEdit(!edit); hdlEdit(e, el.rec_id); window.location.href = "#edit" }}><FontAwesomeIcon icon={faEdit} /></button>
                       <div className={`${el.users.user_id === user.user_id ? "h-1/2" : "h-full"} border-2 border-red-600 text-red-600 hover:cursor-pointer rounded-md flex items-center justify-center w-14`} onClick={(e) => hdlDelete(e, el.rec_id)}><FontAwesomeIcon icon={faTrash} /></div>
                     </>
                   ) : null}

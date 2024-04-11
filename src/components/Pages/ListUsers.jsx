@@ -87,7 +87,7 @@ function ListUsers() {
 
     return (
         <div>
-            <div className="max-w-[80rem] mx-auto min-h-[61.6vh]">
+            <div className="max-w-[80rem] mx-auto min-h-[64.3vh]">
                 <div className="mt-4 bg-white rounded-md p-4">
                     <p>ยินดีตอนรับคุณ {user.user_firstname} {user.user_lastname}</p>
                 </div>
@@ -96,7 +96,7 @@ function ListUsers() {
                         <div className="p-4 pb-4 bg-white my-4 rounded-md shadow-md h-fit">
                             <p className="font-semibold text-[15px] mb-2 select-none">ตัวเลือก</p>
                             <hr />
-                            <div className="mt-2 flex flex-col gap-1">
+                            <div className="mt-2 flex flex-col gap-1 select-none">
                                 <p className={`p-2 pl-2 hover:bg-slate-500 hover:rounded-md hover:font-semibold hover:text-white hover:cursor-pointer ${filter === null ? "bg-slate-500 rounded-md font-semibold text-white" : ""}`} onClick={() => setFilter(null)}>ทั้งหมด</p>
                                 <p className={`p-2 pl-2 hover:bg-slate-500 hover:rounded-md hover:font-semibold hover:text-white hover:cursor-pointer ${filter === "admin" ? "bg-slate-500 rounded-md font-semibold text-white" : ""}`} onClick={() => setFilter("admin")}>ผู้ใช้งาน</p>
                                 <p className={`p-2 pl-2 hover:bg-slate-500 hover:rounded-md hover:font-semibold hover:text-white hover:cursor-pointer ${filter === "users" ? "bg-slate-500 rounded-md font-semibold text-white" : ""}`} onClick={() => setFilter("users")}>ผู้ดูแลระบบ</p>
@@ -106,7 +106,7 @@ function ListUsers() {
                     <div className="w-3/4">
                         <div className="p-4 bg-white my-4 rounded-md shadow-md font-bold">รายชื่อผู้ใช้งานในระบบ</div>
                         <div className="p-4 bg-white my-4 rounded-md shadow-md overflow-x-scroll">
-                            <table className='table-auto w-full min-w-[680px]'>
+                            <table className='table-auto w-full min-w-[680px] select-none'>
                                 <thead className='text-left'>
                                     <tr>
                                         <th>ลำดับ</th>
@@ -125,8 +125,8 @@ function ListUsers() {
                                             <td>{el.user_lastname}</td>
                                             <td>{el.user_email}</td>
                                             <td>{el.user_phone}</td>
-                                            <td className='text-center'><button onClick={(e) => hdlEdit(e, el.user_id, el.user_role)}><FontAwesomeIcon icon={faEdit} /> แก้ไขหน้าที่</button></td>
-                                            <td className='text-center'><button onClick={(e) => hdlDelete(e, el.user_id)}><FontAwesomeIcon icon={faTrash} /> ลบผู้ใช้</button></td>
+                                            <td className='text-center'><button className='bg-yellow-500 hover:bg-yellow-600 px-2 py-1.5 rounded-md my-1 text-white font-semibold text-sm scale-100 active:scale-95' onClick={(e) => hdlEdit(e, el.user_id, el.user_role)}><FontAwesomeIcon icon={faEdit} /> แก้ไขหน้าที่</button></td>
+                                            <td className='text-center'><button className='bg-red-500 hover:bg-red-600 px-2 py-1.5 rounded-md my-1 text-white font-semibold text-sm scale-100 active:scale-95' onClick={(e) => hdlDelete(e, el.user_id)}><FontAwesomeIcon icon={faTrash} /> ลบผู้ใช้</button></td>
                                         </tr>
                                     ))}
                                 </tbody>
@@ -136,6 +136,7 @@ function ListUsers() {
                 </div>
             </div>
 
+            {/* modal */}
             {showModal ? (
                 <>
                     <div className="flex justify-center items-center overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none bg-scroll">
@@ -143,7 +144,7 @@ function ListUsers() {
                             <div className='flex justify-center items-center fixed inset-0'>
                                 <div className='w-72 h-fit bg-white p-4 rounded-lg'>
                                     <div className='flex justify-between'>
-                                        <div>แก้ไขหน้าที่</div>
+                                        <div className='font-semibold'>แก้ไขหน้าที่</div>
                                         <div>
                                             <button onClick={() => {setShowModal(false); setUser_role({}); setUserId("")}}><FontAwesomeIcon icon={faXmarkCircle} /></button>
                                         </div>

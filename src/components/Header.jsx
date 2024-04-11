@@ -22,7 +22,7 @@ function Header() {
 
   return (
     <>
-      <div className="bg-slate-500 select-none">
+      <div className="bg-slate-500 select-none" id="edit">
         <div className="max-w-[80rem] h-14 px-2 mx-auto flex items-center justify-between">
           <div className="w-fit text-lg flex gap-8">
             <h1 className={`font-bold mb-1 hover:cursor-pointer transition ease-in-out hover:text-white ${pathname === '/' ? "text-white" : ""}`} onClick={() => navigate('/')}>ระบบบันทึก</h1>

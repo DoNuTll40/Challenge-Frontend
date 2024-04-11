@@ -53,7 +53,7 @@ function ListCars() {
         </div>
         <div className="bg-white shadow-md p-4 rounded-md mb-2 border-2 min-h-[45.5vh] overflow-x-scroll">
           <hr />
-          <table className='w-[75.8rem] my-2'>
+          <table className='w-[75.8rem] my-2 select-none'>
             <thead>
               <tr>
                 <th>ลำดับ</th>
@@ -63,8 +63,8 @@ function ListCars() {
                 <th>หมายเลขทะเบียน</th>
                 <th>รายละเอียดเพิ่มเติม</th>
                 <th>วัน-เวลา ที่เพิ่ม</th>
+                <th>ผู้ที่เพิ่ม</th>
                 <th>การแก้ไข</th>
-                <th>ผู้ใช้งาน</th>
                 <th>ตัวเลือก</th>
               </tr>
             </thead>
@@ -77,10 +77,10 @@ function ListCars() {
                   <td>{el.rec_color}</td>
                   <td>{el.rec_regiscar}</td>
                   <td>{el.rec_detail}</td>
-                  <td>{new Date(el.rec_create_at).toLocaleString('th-TH')}</td>
-                  <td>{el.rec_create_at !== el.rec_update_at ? "มีการแก้ไข" : "ไม่มีการแก้ไข"}</td>
-                  <td>{el.users.user_firstname}</td>
-                  <td><button className='w-full flex items-center justify-center' onClick={(e) => hdlDelete(e, el.rec_id)}><FontAwesomeIcon icon={faTrash} /></button></td>
+                  <td className='text-center'>{new Date(el.rec_create_at).toLocaleString('th-TH')}</td>
+                  <td className='text-center'>{el.users.user_firstname}</td>
+                  <td><p className={`${el.rec_create_at !== el.rec_update_at ? "border-green-600 border-2 px-2 py-1.5 rounded-md font-semibold text-green-600 text-center" : "bg-green-600 px-2 py-1.5 rounded-md font-semibold text-white text-center"}`}>{el.rec_create_at !== el.rec_update_at ? "มีการแก้ไข" : "ไม่มีการแก้ไข"}</p></td>
+                  <td><button className='w-full bg-red-500 hover:bg-red-600 px-2 py-2 rounded-md my-1 text-white font-semibold text-sm scale-100 active:scale-95' onClick={(e) => hdlDelete(e, el.rec_id)}><FontAwesomeIcon icon={faTrash} /> ลบ</button></td>
                 </tr>
               ))}
             </tbody>
